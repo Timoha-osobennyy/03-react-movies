@@ -20,3 +20,7 @@ rad.json
 *.flf
 #Test results file
 TestResults.xml
+
+# API Configuration
+VITE_TMDB_API_KEY=your_api_key_here
+VITE_TMDB_API_URL=https://api.themoviedb.org/3

@@ -10,7 +10,9 @@
     "preview": "vite preview",
     "deploy": "vite build --base=/03-react-movies/ && node ./node_modules/gh-pages/bin/gh-pages.js -d dist",
     "gh-deploy": "npm run build && npm run deploy",
-    "vercel-build": "npx vite build --mode production"
+    "vercel-build": "npx vite build --mode production",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --ext .ts,.tsx"
   },
   "dependencies": {
     "modern-normalize": "^3.0.1",
