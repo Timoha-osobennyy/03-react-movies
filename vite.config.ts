@@ -3,14 +3,22 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
-  const base = env.VERCEL ? '/' : '/03-react-movies/'
+  const isProduction = mode === 'production'
+  const isVercel = env.VERCEL === '1'
+  const isGhPages = env.GH_PAGES === '1'
+
+  
+  const base = isVercel ? '/' : 
+              isGhPages ? '/03-react-movies/' : 
+              '/'
 
   return {
     base,
     plugins: [react()],
     server: {
       open: true,
-      port: 3000
+      port: 3000,
+      strictPort: true
     },
     build: {
       outDir: 'dist',
@@ -28,6 +36,9 @@ export default defineConfig(({ mode }) => {
       modules: {
         localsConvention: 'camelCase'
       }
+    },
+    define: {
+      'import.meta.env.BASE_URL': JSON.stringify(base)
     }
   }
 })
