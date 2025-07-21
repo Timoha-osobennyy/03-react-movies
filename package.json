@@ -4,16 +4,21 @@
   "private": true,
   "type": "module",
   "homepage": "https://timoha-osobennyy.github.io/03-react-movies/",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
   "scripts": {
-    "dev": "vite",
-    "dev:local": "vite --mode development",
+    "dev": "vite --open /index.html",
+    "dev:local": "vite --mode development --open /index.html",
     "build": "vite build --mode production",
     "build:gh-pages": "vite build --base=/03-react-movies/ --mode production",
-    "preview": "vite preview",
-    "deploy": "npm run build:gh-pages && gh-pages -d dist",
+    "preview": "vite preview --open /index.html",
+    "deploy": "npm run build:gh-pages && gh-pages -d dist -b gh-pages",
     "deploy:vercel": "npm run build && vercel --prod",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint . --ext .ts,.tsx"
+    "lint": "eslint . --ext .ts,.tsx",
+    "postinstall": "vite build"
   },
   "dependencies": {
     "axios": "^1.10.0",

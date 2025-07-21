@@ -1,30 +1,27 @@
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
+import { fileURLToPath } from 'node:url'
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
-  const isProduction = mode === 'production'
-  const isVercel = env.VERCEL === '1'
-  const isGhPages = env.GH_PAGES === '1'
-
-  
-  const base = isVercel ? '/' : 
-              isGhPages ? '/03-react-movies/' : 
-              '/'
+  const base = env.VERCEL ? '/' : env.GH_PAGES ? '/03-react-movies/' : '/'
 
   return {
     base,
+    root: fileURLToPath(new URL('./', import.meta.url)),
+    publicDir: fileURLToPath(new URL('./public', import.meta.url)),
     plugins: [react()],
     server: {
-      open: true,
+      open: '/index.html',
       port: 3000,
-      strictPort: true
+      strictPort: true,
+      host: true
     },
     build: {
-      outDir: 'dist',
+      outDir: fileURLToPath(new URL('./dist', import.meta.url)),
       emptyOutDir: true,
-      chunkSizeWarningLimit: 2000,
       rollupOptions: {
+        input: fileURLToPath(new URL('./public/index.html', import.meta.url)),
         output: {
           assetFileNames: 'assets/[name]-[hash][extname]',
           chunkFileNames: 'assets/[name]-[hash].js',
@@ -38,7 +35,8 @@ export default defineConfig(({ mode }) => {
       }
     },
     define: {
-      'import.meta.env.BASE_URL': JSON.stringify(base)
+      'import.meta.env.BASE_URL': JSON.stringify(base),
+      '__APP_VERSION__': JSON.stringify(process.env.npm_package_version)
     }
   }
 })
