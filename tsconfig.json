@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "NodeNext",
+    "moduleResolution": "bundler",
     "strict": true,
     "jsx": "react-jsx",
     "esModuleInterop": true,
@@ -12,9 +12,10 @@
     "paths": {
       "@/*": ["./*"]
     },
-    "types": ["vite/client"],
+    "types": ["vite/client", "node"],
     "outDir": "./dist",
-    "noEmit": true
+    "noEmit": true,
+    "allowImportingTsExtensions": true
   },
   "include": [
     "src",

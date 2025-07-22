@@ -77,7 +77,7 @@ module.exports = {
     'import/no-default-export': 'off',
     'import/prefer-default-export': 'off',
     
-    // Доступность
+    
     'jsx-a11y/anchor-is-valid': [
       'error',
       {

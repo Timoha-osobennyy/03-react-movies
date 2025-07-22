@@ -1,4 +1,5 @@
 import { FormEvent, useState } from 'react';
+import React from 'react';
 import toast from 'react-hot-toast';
 import styles from './SearchBar.module.css';
 
@@ -25,12 +26,10 @@ export default function SearchBar({ onSubmit }: SearchBarProps) {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-        <a
-          className={styles.link}
+        <a className={styles.link}
           href="https://www.themoviedb.org/"
           target="_blank"
-          rel="noopener noreferrer"
-        >
+          rel="noopener noreferrer" >
           Powered by TMDB
         </a>
         <form className={styles.form} onSubmit={handleSubmit}>

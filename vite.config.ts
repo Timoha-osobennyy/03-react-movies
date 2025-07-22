@@ -11,6 +11,12 @@ export default defineConfig(({ mode }) => {
     root: fileURLToPath(new URL('./', import.meta.url)),
     publicDir: fileURLToPath(new URL('./public', import.meta.url)),
     plugins: [react()],
+    resolve: {
+      extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
+      alias: {
+        '@': fileURLToPath(new URL('./src', import.meta.url))
+      }
+    },
     server: {
       open: '/index.html',
       port: 3000,
@@ -33,10 +39,6 @@ export default defineConfig(({ mode }) => {
       modules: {
         localsConvention: 'camelCase'
       }
-    },
-    define: {
-      'import.meta.env.BASE_URL': JSON.stringify(base),
-      '__APP_VERSION__': JSON.stringify(process.env.npm_package_version)
     }
   }
 })
